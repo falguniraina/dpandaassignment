@@ -65,10 +65,8 @@ function App() {
             </Dimmer>
           ) : (
             <Routes>
-              {/* <Route path='/' element={<Home />} /> */}
               <Route path='/' element={<People data={people} paginationData={totalPages} currentPage={currentPage} pageChangeCallback={triggerPageChange} />} />
               <Route path="/character/:url" element={<CharacterDetail />} />;
-              <Route path="/characterd" element={<CharacterDetailTest />} />;
             </Routes>
           )}
 

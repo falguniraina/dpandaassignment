@@ -20,8 +20,6 @@ export default function People({ data, paginationData, currentPage, pageChangeCa
                     return (
                         <Grid.Column key={i}>
                             <Link to={`/character/${encodeURIComponent(people.url)}`}>
-                            {/* <Link to={{ pathname: `/characterd`, state: { people } }}> */}
-
                                 <Card>
                                     <Card.Content>
                                         <Card.Header>{people.name}</Card.Header>
