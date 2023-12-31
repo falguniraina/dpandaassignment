@@ -1,6 +1,21 @@
-
 .pagination-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.character-title:hover {
+  text-decoration: underline;
+  color: #067fea;
+}
+
+#app-title {
+  margin-bottom: 0px;
+  padding: 3px;
+  color: blanchedalmond;
 }

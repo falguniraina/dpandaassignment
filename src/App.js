@@ -6,6 +6,8 @@ import People from "./components/People";
 import PaginationComponent from './components/PaginationComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CharacterDetail from './components/CharacterDetail';
+import { BookmarkProvider } from './contexts/BookmarkContext';
+import Favorites from './components/Favorites';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -63,10 +65,13 @@ function App() {
               <Loader inverted>Loading</Loader>
             </Dimmer>
           ) : (
-            <Routes>
-              <Route path='/' element={<People data={people} paginationData={totalPages} currentPage={currentPage} pageChangeCallback={triggerPageChange} />} />
-              <Route path="/character/:url" element={<CharacterDetail />} />;
-            </Routes>
+            <BookmarkProvider>
+              <Routes>
+                <Route path='/' element={<People data={people} paginationData={totalPages} currentPage={currentPage} pageChangeCallback={triggerPageChange} />} />
+                <Route path="/character/:url" element={<CharacterDetail />} />;
+                <Route path="/favourites" element={<Favorites />} />;
+              </Routes>
+            </BookmarkProvider>
           )}
 
         </Container>
