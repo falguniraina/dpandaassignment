@@ -3,7 +3,7 @@ import { Card, Grid } from 'semantic-ui-react';
 import PaginationComponent from './PaginationComponent';
 import { Link } from 'react-router-dom';
 import { useBookmark } from '../contexts/BookmarkContext';
-import Bookmark from './Bookmark';
+import BookmarkIcon from './BookmarkIcon';
 
 
 export default function People({ data, paginationData, currentPage, pageChangeCallback }) {
@@ -42,7 +42,7 @@ export default function People({ data, paginationData, currentPage, pageChangeCa
                                                 </Link>
                                             </div>
                                             <div className='character-favourite' onClick={() => handleBookmarkClick(people)}>
-                                                <Bookmark characterData={people}/>
+                                                <BookmarkIcon characterData={people}/>
                                             </div>
                                         </div>
                                     </Card.Header>

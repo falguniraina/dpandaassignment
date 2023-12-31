@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useBookmark } from '../contexts/BookmarkContext';
 
-export default function Bookmark({ characterData }) {
+export default function BookmarkIcon({ characterData }) {
 
     const { bookmarkedCharacters} = useBookmark();
 
