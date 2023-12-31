@@ -10,9 +10,11 @@ import MoviesList from './MoviesList';
 const CharacterDetail = () => {
   const { url } = useParams();
   const [character, setCharacter] = useState();
+  const [loading, setLoading] = useState(true);
 
   const fetchCharacter = async (characterUrl) => {
     try {
+      setLoading(true);
       const decodedUrl = decodeURIComponent(characterUrl);
       console.log(decodedUrl);
       const response = await fetch(decodedUrl);
@@ -21,6 +23,8 @@ const CharacterDetail = () => {
       setCharacter(data);
     } catch (error) {
       console.error('Error fetching people:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,28 +39,29 @@ const CharacterDetail = () => {
     <Container>
       <Row>
         <Col>
-
-          <div>
-            <h2>Character Details</h2>
-            {character && (
-              <div>
-                <p>Character Name: {character.name}</p>
-                <p>Height: {character.height}</p>
-                <p>Gender: {character.gender}</p>
-                <p>Eye Color: {character.eye_color}</p>
-                <p>Birth Year: {character.birth_year}</p>
-                <p>Skin Color: {character.skin_color}</p>
-              </div>
+          {loading ? (
+            <h2>Loading Character Details.....</h2>
+          ) :
+            (
+              <>
+                {character && (
+                  <div>
+                    <h2>{character.name}</h2>
+                    <p>Height: {character.height}</p>
+                    <p>Gender: {character.gender}</p>
+                    <p>Eye Color: {character.eye_color}</p>
+                    <p>Birth Year: {character.birth_year}</p>
+                    <p>Skin Color: {character.skin_color}</p>
+                  </div>
+                )}
+              </>
             )}
-          </div>
-
         </Col>
 
         <Col>
-        <div>
-            <h2>Movie Details</h2>
+          <div>
             {character && (
-            <MoviesList moviesUrl={character.films}/>
+              <MoviesList moviesUrl={character.films} />
             )}
           </div>
         </Col>

@@ -6,7 +6,6 @@ import People from "./components/People";
 import PaginationComponent from './components/PaginationComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CharacterDetail from './components/CharacterDetail';
-import CharacterDetailTest from './components/CharacterDetailsTest';
 
 function App() {
   const [people, setPeople] = useState([]);

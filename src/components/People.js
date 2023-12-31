@@ -10,7 +10,6 @@ export default function People({ data, paginationData, currentPage, pageChangeCa
         pageChangeCallback(page);
     }
 
-
     return (
         <>
             <h1>People</h1>
@@ -40,7 +39,6 @@ export default function People({ data, paginationData, currentPage, pageChangeCa
             </Grid>
 
             <PaginationComponent totalPages={paginationData} currentPage={currentPage} onPageChange={handleChangeInPeopleComponent} />
-
         </>
     )
 }
