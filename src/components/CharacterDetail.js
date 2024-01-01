@@ -6,20 +6,19 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MoviesList from './MoviesList';
+import { useCharacterList } from '../contexts/CharacterListContext';
 
 const CharacterDetail = () => {
-  const { url } = useParams();
+  const { id } = useParams();
   const [character, setCharacter] = useState();
   const [loading, setLoading] = useState(true);
+  const { characterList, createCharacterList } = useCharacterList();
 
-  const fetchCharacter = async (characterUrl) => {
+  const fetchCharacter = async (id) => {
     try {
       setLoading(true);
-      const decodedUrl = decodeURIComponent(characterUrl);
-      console.log(decodedUrl);
-      const response = await fetch(decodedUrl);
-      const data = await response.json();
-      console.log(data);
+      const receivedIndex = id;
+      const data = characterList[receivedIndex];
       setCharacter(data);
     } catch (error) {
       console.error('Error fetching people:', error);
@@ -29,8 +28,8 @@ const CharacterDetail = () => {
   };
 
   useEffect(() => {
-    // Decode the URL parameter and fetch character details
-    fetchCharacter(url);
+  
+    fetchCharacter(id);
 
   }, []);
 

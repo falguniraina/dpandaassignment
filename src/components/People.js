@@ -37,12 +37,12 @@ export default function People({ data, paginationData, currentPage, pageChangeCa
                                     <Card.Header>
                                         <div className='title-container'>
                                             <div className='character-title'>
-                                                <Link to={`/character/${encodeURIComponent(people.url)}`}>
+                                                <Link to={`/character/${i}`}>
                                                     {people.name}
                                                 </Link>
                                             </div>
                                             <div className='character-favourite' onClick={() => handleBookmarkClick(people)}>
-                                                <BookmarkIcon characterData={people}/>
+                                                <BookmarkIcon characterData={people} />
                                             </div>
                                         </div>
                                     </Card.Header>
