@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css'
+import { CharacterListProvider } from './contexts/CharacterListContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <CharacterListProvider>
+      <App />
+    </CharacterListProvider>
   </React.StrictMode>
 );
 

@@ -8,9 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CharacterDetail from './components/CharacterDetail';
 import { BookmarkProvider } from './contexts/BookmarkContext';
 import Favorites from './components/Favorites';
+import { CharacterListProvider, useCharacterList } from './contexts/CharacterListContext';
 
 function App() {
-  const [people, setPeople] = useState([]);
+  const { characterList, createCharacterList } = useCharacterList();
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -19,17 +20,15 @@ function App() {
     fetchPeople(page);
   }
 
-
   function paginationData(jsonResults, pageNumber) {
-    let totalCharacters = jsonResults.count;
-    let resultsPerPage = 10;
+    const totalCharacters = jsonResults.count;
+    const resultsPerPage = 10;
     let totalPages = Math.floor(totalCharacters / resultsPerPage);
-    if (totalCharacters % resultsPerPage != 0) {
+    if (totalCharacters % resultsPerPage !== 0) {
       totalPages += 1;
     }
     setTotalPages(totalPages);
   }
-
 
   const fetchPeople = async (pageNumber = 1) => {
     try {
@@ -38,11 +37,10 @@ function App() {
       const url = `https://swapi.dev/api/people/?page=${pageNumber}`;
       const response = await fetch(url);
       const data = await response.json();
-      setPeople(data.results);
-      if (pageNumber == 1) {
+      createCharacterList(data.results);
+      if (pageNumber === 1) {
         paginationData(data, pageNumber);
       }
-
     } catch (error) {
       console.error('Error fetching people:', error);
     } finally {
@@ -52,8 +50,7 @@ function App() {
 
   useEffect(() => {
     fetchPeople();
-  }, []); // Runs once when the component mounts
-
+  }, []); 
 
   return (
     <>
@@ -65,21 +62,18 @@ function App() {
               <Loader inverted>Loading</Loader>
             </Dimmer>
           ) : (
+
             <BookmarkProvider>
               <Routes>
-                <Route path='/' element={<People data={people} paginationData={totalPages} currentPage={currentPage} pageChangeCallback={triggerPageChange} />} />
-                <Route path="/character/:url" element={<CharacterDetail />} />;
-                <Route path="/favourites" element={<Favorites />} />;
+                <Route path='/' element={<People data={characterList} paginationData={totalPages} currentPage={currentPage} pageChangeCallback={triggerPageChange} />} />
+                <Route path="/character/:id" element={<CharacterDetail />} />
+                <Route path="/favourites" element={<Favorites />} />
               </Routes>
             </BookmarkProvider>
-          )}
 
+          )}
         </Container>
       </Router>
-
-
-
-
     </>
   );
 }
