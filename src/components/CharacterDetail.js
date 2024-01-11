@@ -1,4 +1,4 @@
-// src/CharacterDetail.js
+// CharacterDetail.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';

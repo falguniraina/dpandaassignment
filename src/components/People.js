@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, Grid } from 'semantic-ui-react';
+// People.js
+import React from 'react';
 import PaginationComponent from './PaginationComponent';
 import { Link } from 'react-router-dom';
 import { useBookmark } from '../contexts/BookmarkContext';
@@ -26,7 +26,7 @@ export default function People({ data, paginationData, currentPage, pageChangeCa
     }
 
     function sortCharacters(id) {
-       let sortedList = [];
+        let sortedList = [];
         switch (id) {
             case 1:
                 sortedList = [...data].sort((a, b) => a.name.localeCompare(b.name));
@@ -66,40 +66,53 @@ export default function People({ data, paginationData, currentPage, pageChangeCa
                 </div>
             </div>
 
-            <Grid columns={2}>
-                {data.map((people, i) => {
-                    return (
-                        <Grid.Column key={i}>
-                            <Card>
-                                <Card.Content>
-                                    <Card.Header>
-                                        <div className='title-container'>
-                                            <div className='character-title'>
-                                                <Link to={`/character/${i}`}>
-                                                    {people.name}
-                                                </Link>
-                                            </div>
-                                            <div className='character-favourite' onClick={() => handleBookmarkClick(people)}>
-                                                <BookmarkIcon characterData={people} />
-                                            </div>
+            <div className='slider-container'>
+                <div className='slider-track'>
+                    {data.map((people, i) => (
+                        <div key={i} className='person-slide'>
+                            <div className='person-card'>
+                                <div className='title-container'>
+                                    <div className='character-title'>
+                                        <Link to={`/character/${i}`}>
+                                            {people.name}
+                                        </Link>
+                                    </div>
+                                    <div className='character-favourite' onClick={() => handleBookmarkClick(people)}>
+                                        <BookmarkIcon characterData={people} />
+                                    </div>
+                                </div>
+                                <div className='character-details'>
+                                    <div className='character-properties'>
+                                        <div>
+                                            <strong>Height</strong>
+                                            <p>{people.height}</p>
                                         </div>
-                                    </Card.Header>
-                                    <Card.Description>
-                                        <strong>Height</strong>
-                                        <p>{people.height}</p>
-                                        <strong>Mass</strong>
-                                        <p>{people.mass}</p>
-                                        <strong>Hair Color</strong>
-                                        <p>{people.hair_color}</p>
-                                    </Card.Description>
-                                </Card.Content>
-                            </Card>
-                        </Grid.Column>
-                    )
-                })}
-            </Grid>
+                                        <div>
+                                            <strong>Mass</strong>
+                                            <p>{people.mass}</p>
+                                        </div>
+                                    </div>
+                                    <div className="character-properties">
+                                        <div>
+                                            <strong>Hair Color</strong>
+                                            <p>{people.hair_color}</p>
+                                        </div>
+                                        <div>
+                                            <strong>Skin Color</strong>
+                                            <p>{people.skin_color}</p>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
 
             <PaginationComponent totalPages={paginationData} currentPage={currentPage} onPageChange={handleChangeInPeopleComponent} />
         </>
-    )
+    );
 }

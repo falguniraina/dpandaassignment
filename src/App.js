@@ -1,3 +1,4 @@
+//App.js
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -10,11 +11,13 @@ import { BookmarkProvider } from './contexts/BookmarkContext';
 import Favorites from './components/Favorites';
 import { CharacterListProvider, useCharacterList } from './contexts/CharacterListContext';
 
+
 function App() {
   const { characterList, createCharacterList } = useCharacterList();
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+
 
   function triggerPageChange(page) {
     fetchPeople(page);
@@ -50,30 +53,33 @@ function App() {
 
   useEffect(() => {
     fetchPeople();
-  }, []); 
+  }, []);
 
   return (
     <>
-      <Router>
-        <Navbar />
-        <Container>
-          {loading ? (
-            <Dimmer active inverted>
-              <Loader inverted>Loading</Loader>
-            </Dimmer>
-          ) : (
 
-            <BookmarkProvider>
-              <Routes>
-                <Route path='/' element={<People data={characterList} paginationData={totalPages} currentPage={currentPage} pageChangeCallback={triggerPageChange} />} />
-                <Route path="/character/:id" element={<CharacterDetail />} />
-                <Route path="/favourites" element={<Favorites />} />
-              </Routes>
-            </BookmarkProvider>
+        <Router>
+          <Navbar />
+          <Container>
+            {loading ? (
+              <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+              </Dimmer>
+            ) : (
 
-          )}
-        </Container>
-      </Router>
+              <BookmarkProvider>
+                <Routes>
+                  <Route path='/' element={<People data={characterList} paginationData={totalPages} currentPage={currentPage} pageChangeCallback={triggerPageChange} />} />
+                  <Route path="/character/:id" element={<CharacterDetail />} />
+                  <Route path="/favourites" element={<Favorites />} />
+                </Routes>
+              </BookmarkProvider>
+
+            )}
+          </Container>
+        </Router>
+
+
     </>
   );
 }
