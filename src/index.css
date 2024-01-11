@@ -26,6 +26,11 @@
   color: blanchedalmond;
 }
 
+.login-form{
+  width: 300px;
+
+}
+
 .slider-container {
   overflow-x: scroll;
   white-space: nowrap;
@@ -38,7 +43,6 @@
 
 .person-slide {
   flex: 0 0 calc(50% - 10px);
-  /* Set to 50% minus margin to display 2 cards at a time */
   margin-right: 20px;
 }
 

@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css'
 import { CharacterListProvider } from './contexts/CharacterListContext';
+import { CurrentUserProvider } from './contexts/CurrentUserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+  <CurrentUserProvider>
     <CharacterListProvider>
       <App />
     </CharacterListProvider>
+  </CurrentUserProvider>
   // </React.StrictMode>
 );
 
