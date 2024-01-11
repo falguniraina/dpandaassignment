@@ -1,3 +1,4 @@
+//App.js
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -13,6 +14,7 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import Login from './components/Login';
 
 
+
 function App() {
   const { characterList, createCharacterList } = useCharacterList();
   const { currentUser, addCurrentUser } = useCurrentUser();
@@ -20,9 +22,11 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
+
   const handleLogin = (loggedInUser) => {
     addCurrentUser(loggedInUser);
   };
+
 
   function triggerPageChange(page) {
     fetchPeople(page);
@@ -62,15 +66,6 @@ function App() {
 
   return (
     <>
-      <Router>
-        <Navbar />
-        <Container>
-          {loading ? (
-            <Dimmer active inverted>
-              <Loader inverted>Loading</Loader>
-            </Dimmer>
-          ) : (
-
             <BookmarkProvider>
               <Routes>
                 <Route
@@ -97,10 +92,6 @@ function App() {
                 />
               </Routes>
             </BookmarkProvider>
-
-          )}
-        </Container>
-      </Router>
     </>
   );
 }
